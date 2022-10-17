@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Student form</title>
+</head>
+<body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div id="data">
+
+
+<form align="center"><h3><b>Student Form</b></h3><br>
+name : <input type="text" id="Name"><br><br>
+branch : <input type="text" id="branch"><br><br>
+address : <input type="text" id="address"><br><br>
+contact : <input type="text" id="contact"><br><br>
+<button onclick="AddData(event)">Add</button>
+</form>
+</div>
+
+<div id="tab">
+<table id="list" cellspacing="3" cellpadding="3" border="1"><thead>
+<tr>
+<td>Name</td><td>Branch</td><td>Address</td><td>Contact</td>
+</tr></thead>
+<tbody></tbody></table>
+</div>
+
+
+
+<script>
+function AddData(e)
+{
+e.preventDefault();
+var rows="";
+var name=document.getElementById("Name").value;
+var branch=document.getElementById("branch").value;
+var address=document.getElementById("address").value;
+var contact=document.getElementById("contact").value;
+rows+="<tr><td>"+name+"</td><td>"+branch+"</td><td>"+address+"</td><td>"+contact+"</td></tr>";
+$(rows).appendTo("#list tbody");
+}
+</script>
+
+</body>
+</html>
