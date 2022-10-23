@@ -1,9 +1,10 @@
 const formEle = document.createElement('form');
-
+formEle.setAttribute('id','survey-form')
+formEle.setAttribute('class','survey-form')
 const fields = [
     
-    { type: 'text', name: 'firstName', id: 'first-name', label: "First Name" },
-    { type: 'text', name: 'lastname', id: 'last-name', label: "Last Name" },
+    { type: 'text', name: 'firstName', id: 'first-name', label: "First Name",required:true },
+    { type: 'text', name: 'lastname', id: 'last-name', label: "Last Name",required:true},
     { type: 'email', name: "email", id: 'email', label: "Email address" },
     { type: 'text', name: 'address', id: 'address', label: "Address" },
     { type: 'pincode', name: 'pincode', id: 'pincode', label: "Pincode" },
@@ -27,6 +28,7 @@ const FoodFields = [
 fields.map((obj)=>{
     const divEle = document.createElement('div');
     divEle.classList.add('m-3');
+    divEle.classList.add('form-group');
 
     const labelEle = document.createElement('label');
     labelEle.setAttribute('for',obj.id);
@@ -36,9 +38,13 @@ fields.map((obj)=>{
     divEle.appendChild(labelEle);
     const inputEle = document.createElement('input');
     inputEle.setAttribute('id',obj.id);
+    if(obj.required){
+      inputEle.setAttribute('required',obj.required)
+    }
     inputEle.setAttribute('name',obj.name);
     inputEle.setAttribute('type',obj.type);
     inputEle.classList.add('form-control');
+
 
     divEle.appendChild(inputEle);
     formEle.append(divEle)
@@ -99,8 +105,11 @@ FoodFields.map((obj)=>
 
 })
 
+console.log("here",document.querySelectorAll('#survey-form'))
+console.log(document.querySelectorAll('#survey-form .form-group #first-name'))
+
 const btn = document.createElement('button');
-btn.id = 'button';
+btn.id = 'submit';
 btn.setAttribute('type', 'submit');
 btn.setAttribute('class', 'btn btn-primary');
 btn.innerText = "Submit";
