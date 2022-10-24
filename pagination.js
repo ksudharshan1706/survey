@@ -92,9 +92,7 @@ else{
 }
 
 const funprev = ()=> {
-    
     currentidx -= 5
-    // currentidx = currentidx*5
     var nextidx = currentidx + 5
     console.log(currentidx,nextidx)
     console.log("here")

@@ -5,10 +5,12 @@ h1Ele.innerText = 'Survey-Forms'
 const description = document.createElement('p');
 description.id = 'description'
 description.innerText = 'Data from survey-forms to table'
+description.style.textAlign = "center"
+h1Ele.style.textAlign = "center"
 
 
 document.body.append(h1Ele,description);
-
+description.style.textAlign = "center"
 
 
 const formEle = document.createElement('form');
