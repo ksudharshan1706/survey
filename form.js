@@ -60,7 +60,12 @@ fields.map((obj)=>{
     labelEle.innerHTML = obj.label;
 
     divEle.appendChild(labelEle);
-    const inputEle = document.createElement('input');
+    if(obj.type == "textarea"){
+      var inputEle = document.createElement('textarea');  
+    }
+    else{
+    var inputEle = document.createElement('input');
+    }
     inputEle.setAttribute('id',obj.id);
     if(obj.required){
       inputEle.setAttribute('required',obj.required)
@@ -131,8 +136,6 @@ FoodFields.map((obj)=>
 })
 
 
-var textarea = document.getElementById('comments');
-console.log(textarea)
 // console.log("here",document.querySelectorAll('#survey-form'))
 // console.log(document.querySelectorAll('#survey-form .form-group #first-name'))
 
@@ -145,6 +148,10 @@ btn.innerText = "Submit";
 formEle.append(btn);
 document.body.appendChild(formEle)
 
+
+var textarea = document.getElementById('comments');
+console.log(textarea.nodeName,textarea.id)
+console.log(document.querySelectorAll('#survey-form .form-group'))
 //table
 
 const tableElement = document.createElement('table');
