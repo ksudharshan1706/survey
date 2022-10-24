@@ -1,15 +1,29 @@
+const h1Ele = document.createElement('h1');
+h1Ele.id = 'title'
+h1Ele.innerText = 'Survey-Forms'
+
+const description = document.createElement('p');
+description.id = 'description'
+description.innerText = 'Data from survey-forms to table'
+
+
+document.body.append(h1Ele,description);
+
+
+
 const formEle = document.createElement('form');
 formEle.setAttribute('id','survey-form')
 formEle.setAttribute('class','survey-form')
 const fields = [
     
-    { type: 'text', name: 'firstName', id: 'first-name', label: "First Name",required:true },
-    { type: 'text', name: 'lastname', id: 'last-name', label: "Last Name",required:true},
-    { type: 'email', name: "email", id: 'email', label: "Email address" },
-    { type: 'text', name: 'address', id: 'address', label: "Address" },
-    { type: 'pincode', name: 'pincode', id: 'pincode', label: "Pincode" },
-    { type: 'text', name: 'state', id: 'state', label: "State" },
-    { type: 'text', name: 'country', id: 'country', label: "Country" }
+    { type: 'text', name: 'firstName', id: 'first-name',placeholder:'firstname', label: "First Name",required:true },
+    { type: 'text', name: 'lastname', id: 'last-name',placeholder:"lastname", label: "Last Name",required:true},
+    { type: 'email', name: "email", id: 'email',placeholder:"email", label: "Email address",required:true },
+    { type: 'text', name: 'address', id: 'address', label: "Address",required:true },
+    { type: 'pincode', name: 'pincode', id: 'pincode', label: "Pincode",required:true },
+    { type: 'text', name: 'state', id: 'state', label: "State",required:true },
+    { type: 'text', name: 'country', id: 'country', label: "Country",required:true },
+    { type: 'textarea', name: 'comments', id: 'comments', label: "comments" }
   ];
 
 const genderFields = [
@@ -31,6 +45,16 @@ fields.map((obj)=>{
     divEle.classList.add('form-group');
 
     const labelEle = document.createElement('label');
+    if(obj.id === "email"){
+      labelEle.setAttribute('id',obj.id+'-label')
+    }
+    else if(obj.id === "pincode"){
+      labelEle.setAttribute('id','number-label')
+    }
+    else if(obj.id === "first-name"||obj.id === "last-name"){
+      labelEle.setAttribute('id','name-label')
+    }
+    
     labelEle.setAttribute('for',obj.id);
     labelEle.classList.add('form-lable');
     labelEle.innerHTML = obj.label;
@@ -40,6 +64,9 @@ fields.map((obj)=>{
     inputEle.setAttribute('id',obj.id);
     if(obj.required){
       inputEle.setAttribute('required',obj.required)
+    }
+    if(obj.id === "email"||obj.id ==="first-name"||obj.id === "last-name"){
+      inputEle.setAttribute("placeholder",obj.placeholder)
     }
     inputEle.setAttribute('name',obj.name);
     inputEle.setAttribute('type',obj.type);
@@ -99,19 +126,21 @@ FoodFields.map((obj)=>
   foodLabel.setAttribute('for',obj.id);
   foodLabel.classList.add('form-check-label');
   foodLabel.innerText = obj.label;
-
   foodDiv.append(foodEle,foodLabel);
   formEle.append(foodDiv);
-
 })
 
-console.log("here",document.querySelectorAll('#survey-form'))
-console.log(document.querySelectorAll('#survey-form .form-group #first-name'))
+
+var textarea = document.getElementById('comments');
+console.log(textarea)
+// console.log("here",document.querySelectorAll('#survey-form'))
+// console.log(document.querySelectorAll('#survey-form .form-group #first-name'))
 
 const btn = document.createElement('button');
 btn.id = 'submit';
 btn.setAttribute('type', 'submit');
 btn.setAttribute('class', 'btn btn-primary');
+btn.classList.add("m-3")
 btn.innerText = "Submit";
 formEle.append(btn);
 document.body.appendChild(formEle)
