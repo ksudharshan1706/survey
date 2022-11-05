@@ -30,13 +30,16 @@ h1:hover{
         height: 300px;
         width: 200px;
         padding: 1%;
+        /* margin-left: 100px; */
         box-shadow: 5px 5px 5px 5px #470257; 
         border-radius: 10%;
         transition: all 1000ms ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       .simple-transition:hover {
         width: 100%;
-    
         color: white !important;
         background-color: #400a4e;
       }
@@ -78,3 +81,6 @@ h1:hover{
       --p: 100%;
       color: #fff;
     }
+body{
+    background-color: #e1e1e180;
+}

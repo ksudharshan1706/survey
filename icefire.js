@@ -77,17 +77,44 @@ const createElements = (info,type) =>{
     element.innerText = info
     return element
 }
-
-
+const divSmall = createElements('','div');
+divSmall.className = "row container mt-4"
+divSmall.style.height = "auto";
+divSmall.style.display = "flex"
 const fun1 = async() =>{
     const response = await fetch(`https://www.anapioficeandfire.com/api/books`)
     const books = await response.json()
     globalData = books
     maxInd = books.length
     globalData.forEach(({name,isbn,numberOfPages,publisher,released,authors,povCharacters},index)=>{
-        dataDict[index+currentidx] =  `Book: ${name}\nAuthor: ${authors} \nPages: ${numberOfPages}\nReleasedOn: ${released.slice(0,10)}`;
+        dataDict[index+currentidx] =  `Author: ${authors} \nISBN: ${isbn}\nPages: ${numberOfPages}\nReleasedOn: ${released.slice(0,10)}\n`;
         bookNameDict[index+currentidx] = name;
-    })
+        const divChild = createElements('','div');
+        divChild.id = index
+        divChild.className = "mt-2 simple-transition"
+        if((index+1)%4==0){
+            divChild.classList.add("hover-1")
+        }
+        else if((index+1)%3==0){
+            divChild.classList.add("hover-3")
+        }
+        else if((index+1)%2==0){
+            divChild.classList.add("hover-2")
+        }
+        divChild.style.height = "100px";
+        
+        divChild.innerText = name
+        console.log(divChild.innerText)
+        divChild.addEventListener('mouseover',()=>{
+            divChild.innerText = dataDict[divChild.id]
+        })
+        divChild.addEventListener('mouseleave',()=>{
+            divChild.innerText = name
+        })
+        divSmall.append(divChild)
+        mainDiv.append(divSmall)
+        divSmall.style.display = "none"
+        })
     
     globalData.slice(0,5).forEach(({name,isbn,numberOfPages,publisher,released,authors,povCharacters},index)=>{
         const innertr = document.createElement('tr');
@@ -206,53 +233,7 @@ const funprev = ()=> {
     }
 }
 //////////////////////////////////////////////////////////////////////////////// after resolution reduction
-// const createElements = (info,type) =>{
-//     const element = document.createElement(type)
-//     element.innerText = info
-//     return element
-// }
 
-
-
-const divSmall = createElements('','div');
-
-divSmall.className = "row container mt-4"
-divSmall.style.height = "auto";
-divSmall.style.display = "flex"
-// divSmall.style.border = "2px solid red";
-// table.style.display ="none"
-windows = 10
-console.log(bookNameDict)
-
-for(var i = 0;i<windows;i++){
-    const divChild = createElements('','div');
-    divChild.id = i
-    divChild.className = "mt-2 simple-transition"
-    if((i+1)%4==0){
-        divChild.classList.add("hover-1")
-    }
-    else if((i+1)%3==0){
-        divChild.classList.add("hover-3")
-    }
-    else if((i+1)%2==0){
-        divChild.classList.add("hover-2")
-    }
-    divChild.style.height = "100px";
-    divChild.style.border = "2px solid";
-    
-    divChild.innerText = "Book "+(parseInt(divChild.id)+1)
-    console.log(divChild.innerText)
-    divChild.addEventListener('mouseover',()=>{
-        divChild.innerText = dataDict[divChild.id]
-    })
-    divChild.addEventListener('mouseleave',()=>{
-        divChild.innerText = "Book "+(parseInt(divChild.id)+1)
-    })
-    divSmall.append(divChild)
-}
-
-mainDiv.append(divSmall)
-divSmall.style.display = "none"
 const functionName=()=>{
     
     var w = window.innerWidth;
