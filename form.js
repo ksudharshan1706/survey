@@ -221,8 +221,9 @@ formEle.addEventListener('submit',(e)=>{
     const tdgender = createTableElement('td', data['Gender']);
     const tdCountry = createTableElement('td', data['country']);
     const tdFood = createTableElement('td', data['Food']);
-    
+      
     trElement.append(tfName,tlName,tdEmail,taddress,tdpincode,tdstate,tdgender, tdCountry,tdFood);
     tBody.appendChild(trElement);
+    console.log(tBody)
 
 })

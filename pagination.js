@@ -40,18 +40,20 @@ btns.forEach((btn)=>{
     btnsDiv.append(newBtn);  
 
 })
+
 table.style.justifyContent="center"
 table.style.textAlign = "center"
 mainDiv.append(table,btnsDiv)
 mainDiv.style.textAlign ="center"
 document.body.append(mainDiv)
-document.body.style.textAlign = "center"
+
 fetch("https://gist.githubusercontent.com/rvsp/add40254aa126f045837fa5b51f47f1f/raw/4d724bfabf4cce7379a386e23bef6576ab99a2f9/pagination.json")
 .then((response)=>{
     return response.json()
 }
 )
 .then((data)=>{
+    // console.log(data.domains)
     globalData = data
     data.slice(0,5).forEach(({id,name,email})=>{
         const innertr = document.createElement('tr');
