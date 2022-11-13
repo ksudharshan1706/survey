@@ -1,0 +1,32 @@
+.container {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    padding-top: 300px;
+  }
+.heading{
+    color: rgb(189, 132, 47);
+    font-family: sans-serif;
+}
+
+.d-flex{
+    padding-top: 30px;
+    width: 500px;
+}
+
+.transition {
+    margin: 32px;
+    height: 130px;
+    width: 300px;
+    padding: 1%;
+    border-radius: 10%;
+    background-color: white;    
+    transition: all 1000ms ease;
+  }
+
+  .transition:hover {
+    width: 30%;
+    color: white !important;
+    background-color: inherit;
+  }
+

@@ -1,3 +1,4 @@
+window.alert('sort the values by clicking on the header columns')
 var globalData = []
 var currentidx = 0
 var maxInd = 0
@@ -19,18 +20,31 @@ heading.style.width = "vw"
 
 headDiv.append(heading);
 console.log(headDiv)
+const inputTag = document.createElement("input");
+inputTag.type = "text"
+inputTag.id = "myInput"
+inputTag.placeholder = "Search for BookName.."
+inputTag.title = "Type in a Book"
+inputTag.className = "form-control mt-3"
+inputTag.setAttribute('onkeyup',"SearchForBook()")
+// mainDiv.append(inputTag)
 
 const table = document.createElement("table");
+table.id = "myTable2"
 table.className = "table table-hover mt-3"
 const thead = document.createElement("thead");
-
+thead.style.height = "auto"
 thead.className="table table-dark"
 const tbody= document.createElement("tbody");
 const theadrow = document.createElement("tr");
 const headFields = ['No.','BookName','ISBN','Number of Pages','Authors','Publisher Name','Released Date','Lead Charecters']
+var i = 0
 headFields.map((element)=>{
     const tdata = document.createElement("td");
+    tdata.setAttribute('onclick',`sortTable(${i})`)
     tdata.innerText = element;
+    tdata.id = element
+    i += 1
     theadrow.appendChild(tdata)
 })
 thead.style.padding = "100px"
@@ -67,7 +81,7 @@ btns.forEach((btn)=>{
 table.style.justifyContent="center"
 table.style.textAlign = "center"
 table.style.border = "2px solid"
-mainDiv.append(headDiv,table,btnsDiv)
+mainDiv.append(headDiv,inputTag,table,btnsDiv)
 mainDiv.style.textAlign ="center"
 document.body.append(mainDiv)
 
@@ -111,11 +125,12 @@ const fun1 = async() =>{
         divChild.addEventListener('mouseleave',()=>{
             divChild.innerText = name
         })
+        
         divSmall.append(divChild)
         mainDiv.append(divSmall)
         divSmall.style.display = "none"
         })
-    
+        
     globalData.slice(0,5).forEach(({name,isbn,numberOfPages,publisher,released,authors,povCharacters},index)=>{
         const innertr = document.createElement('tr');
         const innerid = createElements(index+currentidx+1,'td');
@@ -251,3 +266,77 @@ const functionName=()=>{
 }
 
 window.addEventListener('resize', functionName);
+
+
+function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("myTable2");
+    switching = true;
+    dir = "asc";
+    while (switching) {
+      switching = false;
+      rows = table.rows;
+      for (i = 1; i < (rows.length - 1); i++) {
+        shouldSwitch = false;
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+        if(n==3){
+            if (dir == "asc") {
+                if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+                  shouldSwitch = true;
+                  break;
+                }
+              } else if (dir == "desc") {
+                if (parseInt(x.innerHTML) < parseInt(y.innerHTML)) {
+                  shouldSwitch = true;
+                  break;
+                }
+              }
+        }
+        else{
+        if (dir == "asc") {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        } else if (dir == "desc") {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+    }
+      }
+      if (shouldSwitch) {
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        switchcount ++;
+      } else {
+        if (switchcount == 0 && dir == "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+  }
+
+
+  function SearchForBook() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable2");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      console.log(td,filter )
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
